@@ -1,4 +1,6 @@
 using AdministracionDePaqueteria.Models;
+using Microsoft.AspNetCore.Mvc;
+
 namespace AdministracionDePaqueteria.Services;
 
 public class estadosPaqueteService : IestadosPaqueteService
@@ -15,6 +17,11 @@ public class estadosPaqueteService : IestadosPaqueteService
         return context.estadosPaquetes;
     }
 
+    public IEnumerable<estadosPaquete> GetEstados(long codRastreo)
+    {
+        return context.estadosPaquetes.Where(p => p.codRastreo == codRastreo);
+    }
+
     public void Save(estadosPaquete estadosPaquete)
     {
         context.Add(estadosPaquete);
@@ -26,11 +33,11 @@ public class estadosPaqueteService : IestadosPaqueteService
         var estadosPaqueteActual = context.estadosPaquetes.Find(codRastreo);
         if(estadosPaqueteActual != null)
         {
-            estadosPaqueteActual.idPaquete = estadosPaqueteActual.idPaquete;
-            estadosPaqueteActual.numPieza = estadosPaqueteActual.numPieza;
-            estadosPaqueteActual.fechaHora = estadosPaqueteActual.fechaHora;
-            estadosPaqueteActual.areaServicio = estadosPaqueteActual.areaServicio;
-            estadosPaqueteActual.estadoActual = estadosPaqueteActual.estadoActual;
+            estadosPaqueteActual.idPaquete = estadosPaquete.idPaquete;
+            estadosPaqueteActual.numPieza = estadosPaquete.numPieza;
+            estadosPaqueteActual.fechaHora = DateTime.Now;
+            estadosPaqueteActual.areaServicio = estadosPaquete.areaServicio;
+            estadosPaqueteActual.estadoActual = estadosPaquete.estadoActual;
 
             context.SaveChanges();
         }
@@ -50,7 +57,10 @@ public class estadosPaqueteService : IestadosPaqueteService
 public interface IestadosPaqueteService
 {
     IEnumerable<estadosPaquete>Get();
+
+    IEnumerable<estadosPaquete>GetEstados(long codRastreo);
     void Save(estadosPaquete estadosPaquete);
     void Update(long codRastreo, estadosPaquete estadosPaquete);
     void Delete(long codRastreo);
+
 }

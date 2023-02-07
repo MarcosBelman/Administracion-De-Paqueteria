@@ -7,7 +7,7 @@ namespace AdministracionDePaqueteria.Controllers;
 public class estadosPaqueteController : ControllerBase
 {
     IestadosPaqueteService estadosPaqueteService;
-    
+    private readonly int records = 5;
     public estadosPaqueteController(IestadosPaqueteService service)
     {
         estadosPaqueteService = service;
@@ -17,6 +17,22 @@ public class estadosPaqueteController : ControllerBase
     public IActionResult Get()
     {
         return Ok(estadosPaqueteService.Get());
+    }
+
+    [HttpGet("historialEstados")]
+    public IActionResult GetEstadosPaquete([FromQuery] int? page, long codRastreo)
+    {
+        var estados = estadosPaqueteService.GetEstados(codRastreo);
+        int _page = page ?? 1;
+        int totalRecords = estados.Count();
+        int totalPages = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(totalRecords/records)));
+        var res = estados.Skip((_page-1) * records).Take(records).ToList();
+    Console.WriteLine($"Numero de registros {totalRecords} Numerp de paginas {totalPages}");
+        return Ok(new{
+            totalPaginas = totalPages,
+            resultados = res,
+            paginaActual = page
+        });
     }
 
     [HttpPost]

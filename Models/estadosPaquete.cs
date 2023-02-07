@@ -14,7 +14,6 @@ namespace AdministracionDePaqueteria.Models
         [Required]
         public int numPieza {get; set;}
 
-        [Required]
         public DateTime fechaHora {get; set;}
 
         [Required]
