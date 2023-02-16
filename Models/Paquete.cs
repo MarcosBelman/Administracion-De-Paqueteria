@@ -24,5 +24,7 @@ namespace AdministracionDePaqueteria.Models
         [Required]
         [MaxLength(80)]
         public string estadoActual {get; set;}
+
+        public virtual ICollection<estadosPaquete> EstadosPaquetes {get; set;}
     }
 }

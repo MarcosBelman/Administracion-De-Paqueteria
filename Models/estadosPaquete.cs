@@ -4,6 +4,9 @@ namespace AdministracionDePaqueteria.Models
 {
     public class estadosPaquete
     {
+        [Key]
+        public int idEstado {get; set;}
+
         [ForeignKey("codRastreo")]
         public long codRastreo  {get; set;}
 
@@ -23,6 +26,9 @@ namespace AdministracionDePaqueteria.Models
         [Required]
         [MaxLength(80)]
         public string estadoActual {get; set;}
+
+
+        public virtual Paquete Paquetes {get; set;}
 
     }
 }

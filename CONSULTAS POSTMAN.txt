@@ -76,4 +76,27 @@ http://localhost:5178/paqueteria/estadosPaquete
 
 
 CONSULTAR PAGINACION
-http://localhost:5178/paqueteria/estadosPaquete/historialEstados?page=2&codRastreo=6040572731
+http://localhost:5178/paqueteria/estadosPaquete/historialEstados?page=1&codRastreo=6040572731
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--INSERTAR PRIMER REGISTRO (POST)
+{
+    "codRastreo": 1234567890,
+    "idPaquete": "GOBM990425",
+    "numPieza": 2,
+    "areaServicio": "MINATITLAN - VERACRUZ",
+    "estadoActual": "Envío Recolectado"
+}
+
+--ACTUALIZAR REGISTRO (PUT)
+{
+    "codRastreo": 1234567890,
+    "idPaquete": "GOBM990425",
+    "numPieza": 2,
+    "areaServicio": "MINATITLAN - VERACRUZ",
+    "estadoActual": "Envío Recolectado"
+}
+
+
+
+

@@ -13,7 +13,7 @@ public class PaquetesContext : DbContext
         List<Paquete> paqueteInit = new List<Paquete>();
         //paqueteInit.Add(new Paquete() {codRastreo = 2040572732, idPaquete = "JD014600010569788723", numPieza = 1, fechaHora = Convert.ToDateTime("02/05/2023"), areaServicio = "MEXICO CITY - MEXICO", estadoActual = "Envío retirado/recolectado."});
         modelBuilder.Entity<Paquete>(paquete =>
-        {   
+        { 
             paquete.ToTable(p => p.HasTrigger("Algun Trigger"));
             //paquete.HasKey(p => p.codRastreo);
             paquete.Property(p => p.codRastreo).ValueGeneratedNever();
@@ -31,7 +31,9 @@ public class PaquetesContext : DbContext
         modelBuilder.Entity<estadosPaquete>(estadosPaquete =>
         {   
             estadosPaquete.ToTable("estadosDelPaquete");
-            estadosPaquete.HasKey(p => p.codRastreo);
+            estadosPaquete.HasKey(p => p.idEstado);
+            estadosPaquete.Property(p => p.codRastreo);
+            estadosPaquete.HasOne(p => p.Paquetes).WithMany(p =>p.EstadosPaquetes).HasForeignKey(p => p.codRastreo).OnDelete(DeleteBehavior.Cascade);
             estadosPaquete.Property(p => p.idPaquete).IsRequired();
             estadosPaquete.Property(p => p.numPieza).IsRequired();
             estadosPaquete.Property(p => p.fechaHora).IsRequired();
