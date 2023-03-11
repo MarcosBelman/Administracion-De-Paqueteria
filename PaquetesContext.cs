@@ -34,7 +34,7 @@ public class PaquetesContext : DbContext
             estadosPaquete.HasKey(p => p.codRastreo);
             estadosPaquete.Property(p => p.idPaquete).IsRequired();
             estadosPaquete.Property(p => p.numPieza).IsRequired();
-            estadosPaquete.Property(p => p.fechaHora).IsRequired(false);
+            estadosPaquete.Property(p => p.fechaHora).IsRequired();
             estadosPaquete.Property(p => p.areaServicio).IsRequired();
             estadosPaquete.Property(p => p.estadoActual).IsRequired();
             estadosPaquete.HasData(estadosPaqueteInit);
